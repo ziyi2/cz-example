@@ -215,7 +215,7 @@ module.exports = {
 安装生成日志工具
 
 ``` javascript
-npm install conventional-changelog -D
+npm install conventional-changelog-cli -D
 ```
 配置生成日志的命令
 
