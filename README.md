@@ -1,6 +1,10 @@
 # cz-example
 
-cz工具集示例
+cz工具集示例，包含以下工具类型：
+
+- 适配器：用于配置cz的提交说明
+- 校验：校验提交说明是否符合规范
+- 日志：根据提交说明的类型快速生成日志
 
 ## Commitizen
 
@@ -21,6 +25,15 @@ commitizen init cz-conventional-changelog --save --save-exact
 ```
 
 > 该命令执行`cz-conventional-changelog`依赖安装和在`pacakge.json`中配置`config.commitizen`适配器路径。
+
+执行提交说明命令`git cz`:
+
+![enter image description here](https://raw.githubusercontent.com/ziyi2/cz-example/master/images/cz_1.png)
+
+代码提交后，查看远程提交说明信息：
+
+![enter image description here](https://raw.githubusercontent.com/ziyi2/cz-example/master/images/cz_2.png)
+
 
 ### cz-customizable
 
@@ -98,6 +111,17 @@ module.exports = {
 
 };
 ```
+
+执行提交说明命令`git cz`:
+
+![enter image description here](https://raw.githubusercontent.com/ziyi2/cz-example/master/images/cz_3.png)
+
+![enter image description here](https://raw.githubusercontent.com/ziyi2/cz-example/master/images/cz_4.png)
+
+
+查看远程提交说明：
+
+![enter image description here](https://raw.githubusercontent.com/ziyi2/cz-example/master/images/cz_5.png)
 
 ## 校验
 
@@ -203,6 +227,17 @@ module.exports = {
 };
 ```
 
+
+执行错误的提交说明：
+
+![enter image description here](https://raw.githubusercontent.com/ziyi2/cz-example/master/images/cz_6.png)
+
+
+执行符合Angular规范的提交说明：
+
+![enter image description here](https://raw.githubusercontent.com/ziyi2/cz-example/master/images/cz_7.png)
+
+
 ### validate-commit-msg
 
 也可以使用工具对cz提交说明进行校验，具体可查看[validate-commit-msg](https://github.com/Frikki/validate-commit-message)。
@@ -211,7 +246,7 @@ module.exports = {
 
 如果是使用cz-customizable适配器做了破坏Angular风格的提交说明配置，那么不能使用@commitlint/config-conventional进行提交说明校验，可以使用[commitlint-config-cz](https://github.com/whizark/commitlint-config-cz)对定制化提交说明进行校验。
 
-## 生成日志
+## 日志
 
 安装生成日志工具
 
@@ -224,3 +259,8 @@ npm install conventional-changelog-cli -D
 ``` javascript
 "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
 ```
+
+执行`npm run version`后可查看生产的日志[CHANGELOG.md](https://github.com/ziyi2/cz-example/blob/master/CHANGELOG.md)。
+
+
+> 注意要使用正确的`Header`的`type`，否则生成的日志会不准确，这里只是一个示例，生成的日志不是很严格。
