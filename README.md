@@ -9,6 +9,8 @@ cz工具集示例
 npm install -g commitizen
 ```
 
+## 适配器
+
 ### cz-conventional-changelog
 
 如果想使用符合Angular规范提交说明的cz适配器
@@ -36,6 +38,7 @@ npm install cz-customizable --save-dev
   }
 }
 ```
+
 新增`.cz-config`定制说明的配置文件（以下是一个汉化示例）：
 
 ``` javascript
@@ -94,6 +97,8 @@ module.exports = {
 
 };
 ```
+
+## 校验
 
 ### commitlint
 
@@ -195,4 +200,25 @@ module.exports = {
   subjectLimit: 100
   
 };
+```
+
+### validate-commit-msg
+
+也可以使用工具对cz提交说明进行校验，具体可查看[validate-commit-msg](https://github.com/Frikki/validate-commit-message)。
+
+### commitlint-config-cz
+
+如果是使用cz-customizable适配器做了破坏Angular风格的提交说明配置，那么不能使用@commitlint/config-conventional进行提交说明校验，可以使用[commitlint-config-cz](https://github.com/whizark/commitlint-config-cz)对定制化提交说明进行校验。
+
+## 生成日志
+
+安装生成日志工具
+
+``` javascript
+npm install conventional-changelog -D
+```
+配置生成日志的命令
+
+``` javascript
+"version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
 ```
