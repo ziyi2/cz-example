@@ -1,4 +1,5 @@
 # cz-example
+
 cz工具集示例
 
 ## Commitizen
@@ -217,6 +218,7 @@ module.exports = {
 ``` javascript
 npm install conventional-changelog-cli -D
 ```
+
 配置生成日志的命令
 
 ``` javascript
