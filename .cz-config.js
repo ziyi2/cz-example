@@ -39,14 +39,14 @@ module.exports = {
     // used if allowCustomScopes is true
     customScope: 'Denote the SCOPE of this change:',
     subject: '短说明:\n',
-    body: '长说明(可选)，使用"|"换行：\n',
+    body: '长说明，使用"|"换行(可选)：\n',
     breaking: '非兼容性说明 (可选):\n',
-    footer: '关联关闭的issue(可选)，例如：#31, #34:\n',
-    confirmCommit: '确定**提交说明**?'
+    footer: '关联关闭的issue，例如：#31, #34(可选):\n',
+    confirmCommit: '确定提交说明?'
   },
 
   allowCustomScopes: true,
-  allowBreakingChanges: ['feat', 'fix'],
+  allowBreakingChanges: ['特性', '修复'],
 
   // limit subject length
   subjectLimit: 100
