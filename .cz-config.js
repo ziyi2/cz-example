@@ -1,47 +1,3 @@
-# cz-example
-cz工具集示例
-
-## Commitizen
-
-全局安装cz
-
-``` javascript
-npm install -g commitizen
-```
-
-### cz-conventional-changelog
-
-如果想使用符合Angular规范提交说明的cz适配器
-
-``` javascript
-// npm
-commitizen init cz-conventional-changelog --save --save-exact
-// yarn
-commitizen init cz-conventional-changelog --yarn --dev --exact
-```
-
-> 该命令执行`cz-conventional-changelog`依赖安装和在`pacakge.json`中配置`config.commitizen`适配器路径。
-
-### cz-customizable
-
-如果想定制说明，可以使用该cz适配器
-
-``` javascript
-npm install cz-customizable --save-dev
-```
-
-该适配器需要手动配置cz的适配器路径，在`pacakge.json`中
-
-``` javascript
-"config": {
-  "commitizen": {
-    "path": "node_modules/cz-customizable"
-  }
-}
-```
-新增`.cz-config`定制说明的配置文件（以下是一个汉化示例）：
-
-``` javascript
 'use strict';
 
 module.exports = {
@@ -96,4 +52,3 @@ module.exports = {
   subjectLimit: 100
 
 };
-```

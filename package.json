@@ -22,11 +22,12 @@
   },
   "homepage": "https://github.com/ziyi2/cz-example#readme",
   "devDependencies": {
-    "cz-conventional-changelog": "^2.1.0"
+    "cz-conventional-changelog": "^2.1.0",
+    "cz-customizable": "^6.0.0"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "node_modules/cz-customizable"
     }
   }
 }
