@@ -14,10 +14,7 @@ npm install -g commitizen
 如果想使用符合Angular规范提交说明的cz适配器
 
 ``` javascript
-// npm
 commitizen init cz-conventional-changelog --save --save-exact
-// yarn
-commitizen init cz-conventional-changelog --yarn --dev --exact
 ```
 
 > 该命令执行`cz-conventional-changelog`依赖安装和在`pacakge.json`中配置`config.commitizen`适配器路径。
@@ -83,10 +80,112 @@ module.exports = {
     // used if allowCustomScopes is true
     customScope: 'Denote the SCOPE of this change:',
     subject: '短说明:\n',
-    body: '长说明(可选)，使用"|"换行：\n',
+    body: '长说明，使用"|"换行(可选)：\n',
     breaking: '非兼容性说明 (可选):\n',
-    footer: '关联关闭的issue(可选)，例如：#31, #34:\n',
-    confirmCommit: '确定**提交说明**?'
+    footer: '关联关闭的issue，例如：#31, #34(可选):\n',
+    confirmCommit: '确定提交说明?'
+  },
+
+  allowCustomScopes: true,
+  allowBreakingChanges: ['特性', '修复'],
+
+  // limit subject length
+  subjectLimit: 100
+
+};
+```
+
+### commitlint
+
+校验提交说明是否符合规范
+
+安装校验工具
+
+``` javascript
+npm install --save-dev @commitlint/cli
+```
+
+#### @commitlint/config-conventional
+
+安装符合Angular风格的校验规则
+
+``` javascript
+npm install --save-dev @commitlint/config-conventional 
+```
+
+新建`commitlint.config.js`文件并设置校验规则：
+
+``` javascript
+module.exports = {
+  extends: ['@commitlint/config-conventional']
+};
+```
+
+安装huksy（git钩子工具）
+
+``` javascript
+npm install husky --save-dev
+```
+
+在package.json中配置`git commit`提交时的校验钩子：
+
+``` javascript
+"husky": {
+  "hooks": {
+    "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+  }  
+}
+```
+
+需要注意，使用该校验规则不能对`.cz-config.js`进行不符合Angular规范的定制处理，例如之前的汉化，此时需要将`.cz-config.js`的文件按照官方示例文件[cz-config-EXAMPLE.js](https://github.com/leonardoanalista/cz-customizable/blob/master/cz-config-EXAMPLE.js)进行符合Angular风格的改动：
+
+``` javascript
+'use strict';
+
+module.exports = {
+
+  types: [
+    {value: 'feat',     name: 'feat:     A new feature'},
+    {value: 'fix',      name: 'fix:      A bug fix'},
+    {value: 'docs',     name: 'docs:     Documentation only changes'},
+    {value: 'style',    name: 'style:    Changes that do not affect the meaning of the code\n            (white-space, formatting, missing semi-colons, etc)'},
+    {value: 'refactor', name: 'refactor: A code change that neither fixes a bug nor adds a feature'},
+    {value: 'perf',     name: 'perf:     A code change that improves performance'},
+    {value: 'test',     name: 'test:     Adding missing tests'},
+    {value: 'chore',    name: 'chore:    Changes to the build process or auxiliary tools\n            and libraries such as documentation generation'},
+    {value: 'revert',   name: 'revert:   Revert to a commit'},
+    {value: 'WIP',      name: 'WIP:      Work in progress'}
+  ],
+
+  scopes: [
+    {name: 'accounts'},
+    {name: 'admin'},
+    {name: 'exampleScope'},
+    {name: 'changeMe'}
+  ],
+
+  // it needs to match the value for field type. Eg.: 'fix'
+  /*
+  scopeOverrides: {
+    fix: [
+      {name: 'merge'},
+      {name: 'style'},
+      {name: 'e2eTest'},
+      {name: 'unitTest'}
+    ]
+  },
+  */
+  // override the messages, defaults are as follows
+  messages: {
+    type: 'Select the type of change that you\'re committing:',
+    scope: '\nDenote the SCOPE of this change (optional):',
+    // used if allowCustomScopes is true
+    customScope: 'Denote the SCOPE of this change:',
+    subject: 'Write a SHORT, IMPERATIVE tense description of the change:\n',
+    body: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n',
+    breaking: 'List any BREAKING CHANGES (optional):\n',
+    footer: 'List any ISSUES CLOSED by this change (optional). E.g.: #31, #34:\n',
+    confirmCommit: 'Are you sure you want to proceed with the commit above?'
   },
 
   allowCustomScopes: true,
@@ -94,6 +193,6 @@ module.exports = {
 
   // limit subject length
   subjectLimit: 100
-
+  
 };
 ```
